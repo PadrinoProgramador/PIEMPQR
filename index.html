@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIEMP QR - Optimización del Control de Equipos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            min-height: 900px;
+        }
+
+        .panel {
+            padding: 40px 30px;
+            border-right: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .panel:last-child {
+            border-right: none;
+        }
+
+        .panel-left {
+            background: linear-gradient(to right, #0B5394 8px, white 8px);
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #0B5394;
+        }
+
+        .logo {
+            max-width: 220px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0B5394;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #6AA84F;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0B5394;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0B5394;
+            margin-bottom: 5px;
+        }
+
+        .subtitle-green {
+            font-size: 16px;
+            font-weight: 700;
+            color: #6AA84F;
+            margin-bottom: 10px;
+        }
+
+        .portada-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d9edf7 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 2px solid #0B5394;
+        }
+
+        .portada-box h2 {
+            font-size: 18px;
+            color: #0B5394;
+            margin-bottom: 20px;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            font-size: 15px;
+            color: #0B5394;
+            font-weight: 600;
+            margin: 12px 0;
+        }
+
+        .content-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+
+        .content-list li {
+            font-size: 14px;
+            color: #333;
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .content-list li:before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #6AA84F;
+            font-weight: bold;
+        }
+
+        .solution-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+
+        .solution-list li {
+            font-size: 14px;
+            color: #0B5394;
+            font-weight: 600;
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-highlight {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #6AA84F;
+            margin: 25px -10px;
+        }
+
+        .implementation-box {
+            background: #e8f4e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .benefit-item:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-item p {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .contact-box {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #6AA84F;
+        }
+
+        .contact-info p {
+            font-size: 13px;
+            color: #333;
+            margin: 8px 0;
+        }
+
+        .contact-info strong {
+            color: #0B5394;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            border: 3px solid #6AA84F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #0B5394 0%, #1a6bb8 100%);
+            border-radius: 8px;
+        }
+
+        .project-image span {
+            font-size: 28px;
+            font-weight: 700;
+            color: #6AA84F;
+            text-align: center;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .panel {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                min-height: 600px;
+            }
+
+            .panel-left {
+                background: linear-gradient(to bottom, #0B5394 8px, white 8px);
+            }
+
+            .panel:last-child {
+                border-bottom: none;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                max-width: 180px;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Panel Izquierdo - Portada -->
+        <div class="panel panel-left">
+            <div class="header-logo">
+                <img src="logo.png" alt="PIEMP QR" class="logo">
+            </div>
+
+            <h1>Optimización del Control de Equipos PIEMP con Tecnología QR</h1>
+
+            <div class="portada-box">
+                <h2>Innovación que transforma la gestión, precisión y eficiencia</h2>
+                
+                <ul class="benefits-list">
+                    <li>✓ Digitalización completa del control de equipos</li>
+                    <li>✓ Trazabilidad en tiempo real</li>
+                    <li>✓ Reducción de tiempos en más del 50%</li>
+                </ul>
+            </div>
+
+            <div class="project-image">
+                <span>Sistema<br>PIEMP QR</span>
+            </div>
+        </div>
+
+        <!-- Panel Central - ¿Por qué este proyecto? -->
+        <div class="panel">
+            <div class="section">
+                <h2>¿Por qué este proyecto?</h2>
+                
+                <h3>Problemática actual:</h3>
+                <ul class="content-list">
+                    <li>La gestión manual con bitácoras físicas genera errores, demoras y falta de trazabilidad confiable</li>
+                    <li>Retrasos en calibraciones y mantenimientos afectan la operatividad y cumplimiento normativo</li>
+                    <li>Dificultad en el control y registro actualizado de equipos en las 10 Zonas de Distribución</li>
+                    <li>Necesidad de optimizar recursos humanos y tiempo invertido en procesos administrativos</li>
+                </ul>
+            </div>
+
+            <div class="section section-highlight">
+                <h2>¿Qué propone el proyecto?</h2>
+                
+                <p class="subtitle-green">Solución con tecnología QR:</p>
+                <ul class="solution-list">
+                    <li>→ Registro automatizado en recepción y entrega</li>
+                    <li>→ Eliminación de procesos manuales y bitácoras físicas</li>
+                    <li>→ Sistema de consulta con información verificada</li>
+                    <li>→ Notificaciones automáticas para mantenimiento</li>
+                    <li>→ Base de datos confiable en tiempo real</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Panel Derecho - Beneficios y Contacto -->
+        <div class="panel">
+            <div class="section">
+                <h2>Beneficios Clave</h2>
+                
+                <div class="benefit-item">
+                    <h4>Automatización y agilidad</h4>
+                    <p>Reduce tiempos y carga manual del personal.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Trazabilidad confiable</h4>
+                    <p>Control integral y actualizado de cada equipo.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Avisos automáticos</h4>
+                    <p>Minimiza errores y retrasos por falta de seguimiento.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Optimización de recursos</h4>
+                    <p>Mayor productividad y reducción de errores administrativos.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Cumplimiento normativo</h4>
+                    <p>Asegura control alineado con estándares internacionales.</p>
+                </div>
+
+                <div class="benefit-item">
+                    <h4>Soporte para auditorías</h4>
+                    <p>Historial completo y fidedigno disponible para toma de decisiones.</p>
+                </div>
+            </div>
+
+            <div class="section implementation-box">
+                <h2>Implementación y Alcance</h2>
+                
+                <p><strong>Aplicable en:</strong> 10 Zonas de Distribución y Oficinas Divisionales de la División Centro Oriente.</p>
+                
+                <p><strong>Resultados medibles:</strong> Mejora en precisión, reducción de tiempos en más del 50%, y control con 99% de fiabilidad.</p>
+            </div>
+
+            <div class="section contact-box">
+                <h2>Contáctanos</h2>
+                
+                <p><strong>¿Quieres saber más?</strong></p>
+                
+                <p>Contáctanos para una presentación detallada y cómo tu equipo puede beneficiarse con esta solución innovadora.</p>
+
+                <div class="contact-info">
+                    <p><strong>Contacto:</strong> [Nombre]</p>
+                    <p><strong>Teléfono:</strong> [tu número]</p>
+                    <p><strong>Correo:</strong> [tu correo]</p>
+                    <p><strong>Sitio web:</strong> [tu sitio]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
